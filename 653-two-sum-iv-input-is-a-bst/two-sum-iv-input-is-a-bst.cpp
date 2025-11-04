@@ -10,43 +10,57 @@
  * };
  */
 
-class bstiterator{
-    stack<TreeNode*> st;
+// class bstiterator{
+//     stack<TreeNode*> st;
 
-    // reverse=false=next
-    //reverse=true=before
-    bool reverse=true;
+//     // reverse=false=next
+//     //reverse=true=before
+//     bool reverse=true;
 
-public:
-    bstiterator(TreeNode* root,bool isreverse){
-        reverse=isreverse;
+// public:
+//     bstiterator(TreeNode* root,bool isreverse){
+//         reverse=isreverse;
 
-        pushall(root);
-    }
+//         pushall(root);
+//     }
 
-    bool hasnext(){
-        return !st.empty();
-    }
+//     bool hasnext(){
+//         return !st.empty();
+//     }
 
-    int next(){
-        TreeNode* temp=st.top();
-        st.pop()   ;
-        if(reverse)
-            pushall(temp->left);
-        else
-            pushall(temp->right);
+//     int next(){
+//         TreeNode* temp=st.top();
+//         st.pop()   ;
+//         if(reverse)
+//             pushall(temp->left);
+//         else
+//             pushall(temp->right);
         
-        return  temp->val;
-    }
+//         return  temp->val;
+//     }
 
-    void pushall(TreeNode* root){
+//     void pushall(TreeNode* root){
 
-        while(root){
-            st.push(root);
-            root=reverse?root->right:root->left;
-        }
-    }
-};
+//         while(root){
+//             st.push(root);
+//             root=reverse?root->right:root->left;
+//         }
+//     }
+// };
+
+
+bool preorder(TreeNode* root,unordered_set<int>& st , int k){
+    if(root==NULL)
+        return false;
+
+    if(st.find(k-root->val)!=st.end())     // NO NEED OF ST.EMPTY()==FASLE CONDITION
+        return true;
+
+    st.insert(root->val);
+
+    return preorder(root->left,st,k) || preorder(root->right,st,k);
+
+}
 
 class Solution {
 public:
@@ -55,19 +69,24 @@ public:
         if(root==NULL)
             return false;
         
-        bstiterator l(root,false);    // next iterator
-        bstiterator r(root,true);    // before iterator
+        // bstiterator l(root,false);    // next iterator
+        // bstiterator r(root,true);    // before iterator
         
-        int i=l.next(), j=r.next();
+        // int i=l.next(), j=r.next();
         
-        while(i<j){
-            if(i+j==k)
-                return true;
-            else if(i+j<k)
-                i=l.next();
-            else
-                j=r.next();
-        }
-        return false;
+        // while(i<j){
+        //     if(i+j==k)
+        //         return true;
+        //     else if(i+j<k)
+        //         i=l.next();
+        //     else
+        //         j=r.next();
+        // }
+        // return false;
+
+                                    // O(n), O(k)
+        
+        unordered_set<int> st;
+        return preorder(root,st,k);
     }
 };
