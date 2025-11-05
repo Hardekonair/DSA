@@ -18,18 +18,34 @@ public:
         queue<TreeNode*> q;
         q.push(root);
         vector<int> ans;
+                                        // Unusual traversal - right to left
+        // while(!q.empty()){
+        //     int size=q.size();
+        //     ans.push_back(q.front()->val);
+        //     for(int i=0;i<size;i++){
+        //         TreeNode* temp=q.front();
+        //         q.pop();
+        //         if(temp->right)
+        //             q.push(temp->right);
+        //         if(temp->left)
+        //             q.push(temp->left);
+        //     }
+                                        // STd traversal- left to right
         while(!q.empty()){
             int size=q.size();
-            ans.push_back(q.front()->val);
+            int lastval=0;
             for(int i=0;i<size;i++){
                 TreeNode* temp=q.front();
                 q.pop();
+                lastval=temp->val;
+                if(temp->left)  
+                    q.push(temp->left);
                 if(temp->right)
                     q.push(temp->right);
-                if(temp->left)
-                    q.push(temp->left);
             }
+            ans.push_back(lastval);
         }
+        
         return ans;
     }
 };
