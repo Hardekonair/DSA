@@ -1,38 +1,36 @@
 class Solution {
 public:
-    // void helper(int i,int n,int& ans, vector<int> & dp){
-    //     if(i==n){
-    //         ans++;
-    //         dp[i]=ans;
-    //         return;
-    //     }
-    //     if(i>n){
-    //         return ;}
-    //     if(dp[i]!=-1){
-    //         ans+=dp[i];
-    //         return;
-    //     }
-    //     helper(i+1,n,ans,dp);  
-    //     helper(i+2,n,ans,dp);
-    // }
-    void helper(int i, int n, int& ans, vector<int>& dp) {
-    if (i == n) {
-        ans++;
-        return;
-    }
-    if (i > n) return;
 
-    // if this state is already computed, skip further recursion
-    if (dp[i] != -1) {
-        ans += dp[i]; // add precomputed number of ways
-        return;
+//     void helper(int i, int n, int& ans, vector<int>& dp) {
+//     if (i == n) {
+//         ans++;
+//         return;
+//     }
+//     if (i > n) return;
+
+//     // if this state is already computed, skip further recursion
+//     if (dp[i] != -1) {
+//         ans += dp[i]; // add precomputed number of ways
+//         return;
+//     }
+
+//     int before = ans; // store ans before this recursion
+//     helper(i + 1, n, ans, dp);
+//     helper(i + 2, n, ans, dp);
+//     dp[i] = ans - before; // ways found from this index
+// }
+
+
+    int helper(int n,vector<int>& dp){
+        if(n==0)
+            return 1;
+        if(n<0)
+            return 0;
+        if(dp[n]!=-1)
+            return dp[n];
+        return dp[n]=helper(n-1,dp)+helper(n-2,dp);
     }
 
-    int before = ans; // store ans before this recursion
-    helper(i + 1, n, ans, dp);
-    helper(i + 2, n, ans, dp);
-    dp[i] = ans - before; // ways found from this index
-}
 
     int climbStairs(int n) {
         // if(n==0 || n==1)
@@ -57,7 +55,7 @@ public:
         
         int ans=0;
         vector<int>dp(n+2,-1);
-        helper(0,n,ans,dp);
-        return ans;
+        return helper(n,dp);
+        // return ans;
     }
 };
