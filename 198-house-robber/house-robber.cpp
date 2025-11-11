@@ -17,8 +17,8 @@ public:
     //     return dp[i]=max(pick,notpick);
     // }
 
-                                // TABULATION
-    // int helper2(vector<int>& nums){
+                                // TABULATION - RECURSION
+    // int helper2(vector<int>& nums){      // BASIC TABULATION
     //     if(nums.size()==1)
     //         return nums[0];
     //     int ans=INT_MAX;
@@ -32,21 +32,42 @@ public:
 
     //     return dp[nums.size()-1];
     // }
+                                // TABULATION- NO RECURSION
 
+    // int helper2(vector<int>& nums){     // MORE PROF.TABULATION
+    //     if(nums.size()==1)
+    //         return nums[0];
+    //     int ans=INT_MAX;
+    //     dp[0]=nums[0];
+    //     for(int i=1;i<nums.size();i++){
+    //         int pick=nums[i];
+    //         if(i>1)
+    //             pick+=dp[i-2];
+    //         int notpick=0+dp[i-1];
+    //         dp[i]=max(pick,notpick);
+    //     }
+
+    //     return dp[nums.size()-1];
+    // }
+
+                                    // TABULATION - NO DP ARRAY
     int helper2(vector<int>& nums){
         if(nums.size()==1)
             return nums[0];
+        int prev=nums[0];
+        int prev2=0;
         int ans=INT_MAX;
         dp[0]=nums[0];
         for(int i=1;i<nums.size();i++){
-            int pick=nums[i];
-            if(i>1)
-                pick+=dp[i-2];
-            int notpick=0+dp[i-1];
-            dp[i]=max(pick,notpick);
+            int pick=nums[i]+prev2;
+            int notpick=0+prev;
+
+            int curr=max(pick,notpick);
+            prev2=prev;
+            prev=curr;
         }
 
-        return dp[nums.size()-1];
+        return prev;
     }
     int rob(vector<int>& nums) {
         memset(dp,-1,sizeof(dp));
