@@ -52,8 +52,6 @@ public:
 
                                     // TABULATION - NO DP ARRAY
     int helper2(vector<int>& nums){
-        if(nums.size()==1)
-            return nums[0];
         int prev=nums[0];
         int prev2=0;
         int ans=INT_MAX;
