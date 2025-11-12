@@ -54,6 +54,27 @@ public:
         return dp[m - 1][n - 1];
     }
 
+                            // TABULATION SPACE OPT
+    int helper5(vector<vector<int>>& grid, int m, int n) {
+        vector<int>dp(grid[0].begin(),grid[0].end());
+        for(int i=1;i<n;i++){
+            dp[i]+=dp[i-1];
+        }
+        for (int i = 1; i < m; i++) {
+            vector<int> temp(n,0);
+            for (int j = 0; j < n; j++) {
+                if (j == 0)
+                    temp[j] = grid[i][j]+dp[j];
+                else {
+                    temp[j]=grid[i][j]+min(temp[j-1],dp[j]);
+                    
+                }
+            }
+            dp=temp;
+        }
+        return dp[n - 1];
+    }
+
     //SPACE OPTIMIZED
     int helper4(vector<vector<int>> grid,int m,int n){
 
@@ -75,6 +96,6 @@ public:
         int m = grid.size();
         int n = grid[0].size();
         dp.resize(m+1, vector<int>(n, -1));
-        return helper4(grid, m , n );
+        return helper5(grid, m , n );
     }
 };
