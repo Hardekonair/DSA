@@ -60,6 +60,25 @@ public:
         return dp[m-1][n-1];
     }
 
+                                        // TABULATION - SC- O(N);
+    int helper4(vector<vector<int>>& grid,int m,int n){
+        vector<int> prevdp(n,1);
+        for(int i=1;i<m;i++){
+            vector<int> temp(n,0);
+            for(int j=0;j<n;j++){
+                if(grid[i][j]==1){
+                    temp[j]=0;
+                    continue;
+                }
+                temp[j]+=prevdp[j];
+                if(j-1>=0)
+                    temp[j]+=temp[j-1];
+            }
+            prevdp=temp;
+        }
+        return prevdp[n-1];
+    }
+    
     int uniquePathsWithObstacles(vector<vector<int>>& grid) {
         int m=grid.size(),n=grid[0].size();
         dp.resize(m,vector<int>(n,-1));
