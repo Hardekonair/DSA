@@ -69,6 +69,33 @@ public:
         return ans;
 
     }
+
+                                    // TABULATION- SPACE OPT
+    int helper4(vector<vector<int>>& mat,int m,int n){
+        vector<int> prevdp(mat[0].begin(),mat[0].end());
+        
+        for(int i=1;i<m;i++){
+            vector<int> temp(n,0);
+            for(int j=0;j<n;j++){
+                int left=INT_MAX,right=INT_MAX;
+                if(j-1>=0)
+                    left=prevdp[j-1];
+                int up=prevdp[j];
+                if(j+1<n)
+                    right=prevdp[j+1];
+                
+                int dir=min({left,up,right});
+                temp[j]=mat[i][j]+dir;
+            }
+            prevdp=temp;
+        }
+        int ans=INT_MAX;
+        for(auto it:prevdp)
+        ans=min(ans,it);
+
+        return ans;
+
+    }
     int minFallingPathSum(vector<vector<int>>& mat) {
         int m=mat.size();
         dp.resize(m,vector<int>(m,-1));
@@ -79,6 +106,6 @@ public:
         // return ans;
 
 
-        return helper3(mat,m,m);
+        return helper4(mat,m,m);
     }
 };
