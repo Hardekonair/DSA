@@ -60,23 +60,22 @@ public:
 
                                     // SPACE OPTIMIZED DP
     int helper4(int m,int n){
-        if(m==0 && n==0)
-            return 1;
-        
-        if(m<0 || n<0)
-            return 0;
 
-        if(dp[m][n]!=-1)
-            return dp[m][n];
-
-        int up=helper(m-1,n);
-        int down=helper(m,n-1);
-
-        return dp[m][n]=up+down;
+        vector<int> dp(n,1);        //BASE CASE - ONLY 1 PATH EXIST
+        for(int i=1;i<m;i++){
+            vector<int> temp(n,0);
+            for(int j=0;j<n;j++){
+                temp[j]=dp[j];
+                if(j-1>=0)
+                    temp[j]+=temp[j-1];
+            }
+            dp=temp;
+        }
+        return dp[n-1];
     }
     int uniquePaths(int m, int n) {
         dp.resize(100,vector<int>(100,-1));
 
-        return helper3(m,n);
+        return helper4(m,n);
     }
 };
