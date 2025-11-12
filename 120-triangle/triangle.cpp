@@ -27,9 +27,26 @@ public:
         }
         return dp[0][0];
     }
+
+    //  TABULATION - SPACE OPT
+    int help3(vector<vector<int>>& t,int n){
+        vector<int> dp(n,0);
+        for(int i=0;i<n;i++){
+            dp[i]=t[n-1][i];
+        }
+
+        for(int i=n-2;i>=0;i--){
+            vector<int> temp(n,0);
+            for(int j=i;j>=0;j--){
+                temp[j]=t[i][j]+min(dp[j],dp[j+1]);
+            }
+            dp=temp;
+        }
+        return dp[0];
+    }
     int minimumTotal(vector<vector<int>>& triangle) {
         int n=triangle.size();
         dp.resize(n,vector<int>(n,-1));
-        return help2(triangle,n);
+        return help3(triangle,n);
     }
 };
