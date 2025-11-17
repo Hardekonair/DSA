@@ -23,12 +23,9 @@ public:
         while(i>=0 && j>=0){
             if(g[i]<=s[j]){
                 c++;
-                i--;
                 j--;
             }
-            else{
                 i--;
-            }
         }
         return c;
     }
