@@ -32,6 +32,27 @@ public:
         }
         return dp[a.size()][b.size()];
     }
+
+    int lcs2(string a,string b){
+        vector<int> prev(a.size()+1,0),curr(b.size()+1,0);
+        // for(int i=0;i<a.size();i++){
+        //     dp[i][0]=0;
+        // }
+        // for(int i=0;i<a.size();i++){
+        //     dp[0][i]=0;
+        // }
+
+        for(int i=1;i<a.size()+1;i++){
+            for(int j=1;j<b.size()+1;j++){
+                if(a[i-1]==b[j-1])
+                    curr[j]=1+prev[j-1];
+                else
+                    curr[j]=max(prev[j],curr[j-1]);
+            }
+            prev=curr;
+        }
+        return prev[b.size()];
+    }
     
 
     int longestPalindromeSubseq(string s) {
@@ -39,6 +60,6 @@ public:
         dp.resize(s.size(),vector<int>(s.size(),-1));
         reverse(a.begin(),a.end());
         // return lcs(s,a,s.size()-1,s.size()-1);
-        return lcs1(s,a);
+        return lcs2(s,a);
     }
 };
