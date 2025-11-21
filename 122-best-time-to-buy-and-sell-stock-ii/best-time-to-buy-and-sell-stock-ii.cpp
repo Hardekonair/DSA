@@ -40,6 +40,7 @@ public:
         }
         return dp[0][1];
     }
+
     int maxp2(vector<int>& prices){
         // vector<vector<int>> dp(prices.size()+1,vector<int>(2,0));
         vector<int> next(2,0),curr(2,0);
@@ -52,11 +53,11 @@ public:
             for(int j=0;j<2;j++){
                 int profit=0;
                 if(j){
-                    profit=max(-prices[i]+next[0],0+next[1]);
+                    profit=max(-prices[i]+next[0],0+next[j]);
                 
                 }
                 else if(!j){
-                    profit=max(prices[i]+next[1],0+next[0]);
+                    profit=max(prices[i]+next[1],0+next[j]);
                 }
                 curr[j]=profit;
             }
