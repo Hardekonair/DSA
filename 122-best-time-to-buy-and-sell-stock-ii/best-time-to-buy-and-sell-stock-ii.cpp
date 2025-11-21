@@ -65,10 +65,27 @@ public:
         }
         return next[1];
     }
+    int maxp3(vector<int>& prices){
+        // vector<int> next(2,0),curr(2,0);
+        // next[0]=next[1]=0;
+
+        int nextnotbuy=0,nextbuy=0;
+        int currnotbuy=0,currbuy=0;
+
+        for(int i=prices.size()-1;i>=0;i--){
+                int profit=0;
+                currbuy=max(-prices[i]+nextnotbuy,0+nextbuy);
+                currnotbuy=max(prices[i]+nextbuy,0+nextnotbuy);
+
+                nextbuy=currbuy;
+                nextnotbuy=currnotbuy;
+        }
+        return nextbuy;
+    }
     int maxProfit(vector<int>& prices) {
         dp.resize(prices.size(),vector<int>(2,-1));
         // return maxp(prices,0,1);
         // return maxp1(prices);
-        return maxp2(prices);
+        return maxp3(prices);
     }
 };
