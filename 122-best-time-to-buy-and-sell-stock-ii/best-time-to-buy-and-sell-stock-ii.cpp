@@ -40,9 +40,34 @@ public:
         }
         return dp[0][1];
     }
+    int maxp2(vector<int>& prices){
+        // vector<vector<int>> dp(prices.size()+1,vector<int>(2,0));
+        vector<int> next(2,0),curr(2,0);
+
+        // dp[prices.size()][0]=0;
+        // dp[prices.size()][1]=0;
+        next[0]=next[1]=0;
+
+        for(int i=prices.size()-1;i>=0;i--){
+            for(int j=0;j<2;j++){
+                int profit=0;
+                if(j){
+                    profit=max(-prices[i]+next[0],0+next[1]);
+                
+                }
+                else if(!j){
+                    profit=max(prices[i]+next[1],0+next[0]);
+                }
+                curr[j]=profit;
+            }
+            next=curr;
+        }
+        return next[1];
+    }
     int maxProfit(vector<int>& prices) {
         dp.resize(prices.size(),vector<int>(2,-1));
         // return maxp(prices,0,1);
-        return maxp1(prices);
+        // return maxp1(prices);
+        return maxp2(prices);
     }
 };
