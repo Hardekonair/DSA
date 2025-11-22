@@ -56,9 +56,36 @@ public:
         }
         return dp[0][1][2];
     }
+
+
+    int maxp2(vector<int>& prices){
+        // vector<vector<vector<int>>>dp(prices.size()+1,vector<vector<int>>(2,vector<int>(3,-1)));
+        vector<vector<int>> curr(2,vector<int>(3,0));
+        vector<vector<int>> ahead(2,vector<int>(3,0));
+
+        for(int i=prices.size()-1;i>=0;i--){
+            for(int j=0;j<2;j++){
+                for(int k=1;k<3;k++){
+                    int profit=0;
+                    if(j){
+                        profit=max(-prices[i]+ahead[0][k],0+ahead[1][k]);
+
+                    }
+                    else{
+                        profit=max(prices[i]+ahead[1][k-1],0+ahead[0][k]);
+                        
+                    }
+                    curr[j][k]=profit;
+                }
+            }
+                ahead=curr;
+        }
+        return ahead[1][2];
+    }
     int maxProfit(vector<int>& prices) {
         dp.resize(prices.size(),vector<vector<int>>(2,vector<int>(3,-1)));    // 3, bcause 1,2 are countable, at 0 the recursion stops so we didn't consider 
         // return maxpr(prices,0,1,2);     // 2nd trans-> 1st trans-> 0th->stop recursion
-        return maxp1(prices);
+        // return maxp1(prices);
+        return maxp2(prices);
     }
 };
