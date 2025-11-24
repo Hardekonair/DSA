@@ -16,7 +16,7 @@ public:
         }
         return true;
     }
-
+    // Mandatory to use STATIC
     static bool comp(string &a,string &b){         // FOR SORTING STRING IN INCREASING ORDER OF THEIR LENGTH
         return a.size()<b.size();
     }
@@ -30,7 +30,11 @@ public:
         vector<int> dp(words.size(),1);
 
         for(int i=1;i<n;i++){
+            int j=i-1;
+            // while(j>=0 && s)
             for(int j=0;j<i;j++){
+                if(words[i].size()-1!=words[j].size())
+                    continue;
                 if(isvalid(words[j],words[i])){
                     dp[i]=max(dp[j]+1,dp[i]);
                 }
