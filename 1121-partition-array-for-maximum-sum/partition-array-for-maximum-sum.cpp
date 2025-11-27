@@ -16,8 +16,27 @@ public:
         }
         return dp[i]=maxcost;
     }
+
+    int partsum1(vector<int>& arr,int k){
+        int n=arr.size();
+        vector<int> dp(n+1,0);
+
+        for(int i=n-1;i>=0;i--){
+            int len=0,maxi=0;
+            int maxcost=0;
+            for(int j=i;j<min(k+i,n);j++){
+                len++;
+                maxi=max(maxi,arr[j]);
+                int cost=len*maxi+dp[j+1];
+                maxcost=max(maxcost,cost);
+            }
+            dp[i]=maxcost;
+        }
+        return dp[0];
+    }
     int maxSumAfterPartitioning(vector<int>& arr, int k) {
-        dp.resize(arr.size(),-1);
-        return partsum(arr,k,0);
+        // dp.resize(arr.size(),-1);
+        // return partsum(arr,k,0);
+        return partsum1(arr,k);
     }
 };
