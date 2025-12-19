@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int shortestPathBinaryMatrix(vector<vector<int>>& grid) {\
+    int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
         int n=grid.size();
         vector<vector<int>> dis(n,vector<int>(n,INT_MAX));
 
@@ -10,6 +10,8 @@ public:
 
         if(grid[0][0]==1 || grid[n-1][n-1]==1)  
             return -1;
+        if(n==1)
+            return 1;
             
         vector<int> r={0,-1,-1,-1,0,1,1,1};
         vector<int> c={-1,-1,0,1,1,1,0,-1};
@@ -34,10 +36,10 @@ public:
                 }
             }
         }
-        
-        if(dis[n-1][n-1]==INT_MAX)  
+
+        // if(dis[n-1][n-1]==INT_MAX)  
             return -1;
-        return dis[n-1][n-1];
+        // return dis[n-1][n-1];
 
     }
 };
