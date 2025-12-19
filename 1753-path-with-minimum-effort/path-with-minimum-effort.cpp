@@ -22,7 +22,7 @@ public:
             q.pop();
 
             if(x==n-1 && y==m-1)
-                ans=min(ans,d);
+                return d;
                 
             else{
             for(int i=0;i<4;i++){
