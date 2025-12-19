@@ -38,6 +38,6 @@ public:
             }
             } 
         }
-        return ans;
+        return -1;
     }
 };
