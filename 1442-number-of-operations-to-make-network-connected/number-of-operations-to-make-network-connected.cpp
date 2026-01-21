@@ -27,7 +27,7 @@ public:
 
         int component=0;
         for(int i=0;i<n;i++){
-            if(par[i]==i)
+            if(find(par,i)==i)
                 component++;
         }
 
