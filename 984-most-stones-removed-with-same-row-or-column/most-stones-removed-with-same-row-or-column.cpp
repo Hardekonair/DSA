@@ -29,30 +29,49 @@ public:
         return par[i]=find(par[i],par);
     }
 
-    void uni(int i,int j,vector<int>& par,vector<vector<int>>& stones){
+    // void uni(int i,int j,vector<int>& par,vector<vector<int>>& stones){
+    //     int pari=find(i,par);
+    //     int parj=find(j,par);
+    //     if(pari==parj)
+    //         return;
+    //     par[parj]=pari;
+    // }
+
+    void uni(int i,int j,vector<int>& par, vector<int>& rnk){
         int pari=find(i,par);
         int parj=find(j,par);
-        if(pari==parj)
-            return;
-        par[parj]=pari;
+
+        if(rnk[pari]==rnk[parj]){
+            par[parj]=pari;
+        }
+        else if(rnk[pari]>rnk[parj]){
+            par[parj]=pari;
+        }
+        else if(rnk[pari]<rnk[parj]){
+            par[pari]=parj;
+        }
+        
     }
     int removeStones(vector<vector<int>>& stones) {
         int n=stones.size();
+
         vector<int> par(n);
+        vector<int> rnk(n);
         for(int i=0;i<n;i++){
             par[i]=i;
+            rnk[i]=1;
         }
 
         for(int i=0;i<n;i++){
             for(int j=i+1;j<n;j++){
                 if(stones[i][0]==stones[j][0] || stones[i][1]==stones[j][1]){
-                    uni(i,j,par,stones);
+                    uni(i,j,par,rnk);
                 }
             }
         }
         int g=0;
         for(int i=0;i<n;i++){
-            if(find(i,par)==i)
+            if(par[i]==i)
                 g++;
         }
         return n-g;
