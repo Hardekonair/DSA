@@ -12,8 +12,7 @@ public:
         int parj=find(j,par);
         if(pari==parj)  
             return;
-        par[pari]=find(parj,par);
-        return;
+        par[pari]=parj;
     }
 
     vector<vector<string>> accountsMerge(vector<vector<string>>& acc) {
