@@ -38,7 +38,7 @@ public:
             for(int c=0;c<n;c++){
             if(grid[r][c]){
                 // vis[r][c]=1;
-                for(auto ti:d){
+                for(auto &ti:d){
                     int nr=r+ti[0],nc=c+ti[1];
                     if(isvalid(nr,nc,n)){
                         if(grid[nr][nc]){
@@ -73,7 +73,7 @@ public:
                         }
                     }
                     int temp=0;
-                    for(auto it:st)
+                    for(auto &it:st)
                         temp+=size[it];
                     ans=max(ans,temp+1);
                 }
