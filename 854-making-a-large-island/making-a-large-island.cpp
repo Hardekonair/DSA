@@ -55,8 +55,11 @@ public:
         }
 
         int ans=0;
-        for(auto it:size)
-            ans=max(it,ans);
+        for(int i=0;i<n*n;i++){
+            if(par[i]==i)
+                ans=max(ans,size[i]);
+        }
+
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
                 if(grid[i][j]==0){
