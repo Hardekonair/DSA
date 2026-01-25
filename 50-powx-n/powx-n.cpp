@@ -32,7 +32,7 @@ public:
             N=-N;
         }
         while(N>0){
-            if(N & 1)
+            if(N%2)
                 ans*=x;
             x*=x;
             N/=2;
