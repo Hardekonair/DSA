@@ -36,11 +36,11 @@ public:
         while(s[i]==' ')
             i++;
 
-        char sign='+';
         // 2.CHECK SIGN
+        int sign=1;
         if(s[i]=='-' || s[i]=='+'){
             // s[i]=='-'?sign='-':sign='+';
-            sign=(s[i]=='-'?'-':'+');
+            sign=(s[i]=='-')?-1:1;
             i++;
         }
 
@@ -48,20 +48,19 @@ public:
         while(s[i]=='0')
             i++;
 
-        long long num=0;
+        long num=0;
         for(int j=i;j<n;j++){
             if(!isdigit(s[j])) break;
 
             int t=s[j]-'0';
             num=num*10+t;
-            if(num>INT_MAX){
-                if(sign=='-')
-                    return INT_MIN;
+
+            if(sign==-1 && num>INT_MAX)
+                return INT_MIN;
+            if(sign==1 && num>INT_MAX)
                 return INT_MAX;
-            }
+            
         }
-        if(sign=='-')
-            return 0-num;
-        return num;
+        return sign*num;
     }
 };
