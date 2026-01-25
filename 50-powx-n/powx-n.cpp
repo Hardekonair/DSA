@@ -35,7 +35,7 @@ public:
             if(N & 1)
                 ans*=x;
             x*=x;
-            N>>=1;
+            N/=2;
         }
         return ans;
     }
