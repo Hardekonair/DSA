@@ -33,8 +33,8 @@ public:
     vector<string> generateParenthesis(int n) {
         string temp="";
         vector<string> ans;
-        // solve(0,0,n,temp,ans);
-        fn(temp,ans,n,0);
+        solve(0,0,n,temp,ans);
+        // fn(temp,ans,n,0);
         return ans;
 
         
