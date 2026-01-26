@@ -26,8 +26,8 @@ public:
         if(nums.size()==0)
             return ans;
         vector<int> temp;
-        // subset(0,nums,temp,ans);
-        fn(nums.size()-1,nums,temp,ans);
+        subset(0,nums,temp,ans);
+        // fn(nums.size()-1,nums,temp,ans);
         return ans;
         
     }
