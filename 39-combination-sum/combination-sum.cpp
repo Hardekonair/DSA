@@ -1,10 +1,6 @@
 class Solution {
 public:
     void combsum(int i,int target,vector<int>& temp,vector<vector<int>>& ans,vector<int>& arr){
-        // if(target==0){
-        //     ans.push_back(temp);
-        //     return;
-        // }
         if(i<0){
             if(target==0){
                 ans.push_back(temp);
@@ -12,12 +8,12 @@ public:
             return;
         }
 
+        combsum(i-1,target,temp,ans,arr);
         if(arr[i]<=target){
             temp.push_back(arr[i]);
             combsum(i,target-arr[i],temp,ans,arr);
             temp.pop_back();
         }
-        combsum(i-1,target,temp,ans,arr);
     }
 
     // void findcomb(int i,int t,vector<int>& arr, vector<int>& temp,vector<vector<int>>& ans){
