@@ -6,7 +6,7 @@ public:
             return 1;
         if(dp[n]!=-1)
             return dp[n];
-        int res=INT_MIN;
+        int res=-1;
         for(int i=1;i<n;i++){
             int prod=max(i*(n-i),i*fn(n-i));
             res=max(res,prod);
