@@ -5,12 +5,13 @@ public:
             ans.push_back(temp);
             return;
         }
-        if(i<0 || t<0)
+        if(i<0)
             return;
-        
+        if(t>=arr[i]){
         temp.push_back(arr[i]);
         combsum2(i-1,t-arr[i],arr,temp,ans);
         temp.pop_back();
+        }
         int j=i-1;
         while(j>=0 && arr[j]==arr[i])
             j--;
