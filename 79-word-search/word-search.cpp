@@ -13,16 +13,16 @@ public:
             return true;
         }
         vis[i][j]=1;
-        // bool ans=false;
+        bool ans=false;
         
         for(int x=0;x<4;x++){
             int ni=i+dir[x][0];
             int nj=j+dir[x][1];
             if(isvalid(ni,nj,board,vis) && word[k+1]==board[ni][nj]){
-                if(wordsearch(ni,nj,k+1,word,board,vis)){
-                    vis[ni][nj]=0;
+                ans=ans || wordsearch(ni,nj,k+1,word,board,vis);
+                if(ans)
                     return true;
-                }
+                
             }
         }
         vis[i][j]=0;
