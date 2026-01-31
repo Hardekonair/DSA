@@ -19,14 +19,14 @@ public:
             int ni=i+dir[x][0];
             int nj=j+dir[x][1];
             if(isvalid(ni,nj,board,vis) && word[k+1]==board[ni][nj]){
-                ans=ans || wordsearch(ni,nj,k+1,word,board,vis);
-                if(ans)
-                    return true;
+                ans=(ans || wordsearch(ni,nj,k+1,word,board,vis));
+                // if(ans)
+                //     return true;
                 
             }
         }
         vis[i][j]=0;
-        return false;
+        return ans;
     }
 
     bool solve(int r,int c,int k,string s,vector<vector<char>>& board,vector<vector<int>>& vis){
