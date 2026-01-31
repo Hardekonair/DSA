@@ -31,8 +31,8 @@ public:
         int i=2;
         char j='2';
         for(auto it:s){
-            mpps[j]=it;
-            j=j+1;
+            mpps[j++]=it;
+            // j=j+1;
         }
         string temp;
         vector<string>ans;
