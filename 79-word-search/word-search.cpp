@@ -7,13 +7,13 @@ public:
         return false;
     }
 
+    vector<vector<int>> dir={{1,0},{0,1},{-1,0},{0,-1}};
     bool wordsearch(int i,int j,int k,string& word,vector<vector<char>>& board,vector<vector<int>>& vis){
         if(k==word.size()-1 ){
             return true;
         }
         vis[i][j]=1;
         // bool ans=false;
-        vector<vector<int>> dir={{1,0},{0,1},{-1,0},{0,-1}};
         
         for(int x=0;x<4;x++){
             int ni=i+dir[x][0];
@@ -51,8 +51,8 @@ public:
         for(int i=0;i<board.size();i++){
             for(int j=0;j<board[0].size();j++){
                 if(board[i][j]==s[0])
-                    // if(wordsearch(i,j,0,s,board,vis))
-                    if(solve(i,j,0,s,board,vis))
+                    // if(solve(i,j,0,s,board,vis))
+                    if(wordsearch(i,j,0,s,board,vis))
                         return true;
                 
             }
