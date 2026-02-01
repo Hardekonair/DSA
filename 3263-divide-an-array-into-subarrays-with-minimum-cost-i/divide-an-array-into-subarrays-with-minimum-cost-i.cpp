@@ -16,42 +16,24 @@ public:
         // }
         // return sum;
 
+        // int a=nums[0],b=INT_MAX,c=INT_MAX;
         // int n=nums.size();
-        // int first=nums[0];
-        
-        // int second=51,third=51;
         // for(int i=1;i<n;i++){
-        //     int curr=nums[i];
-
-        //     if(curr<=second){
-        //         third=second;
-        //         second=curr;
+        //     if(nums[i]<b){
+        //         c=b;
+        //         b=nums[i];
         //     }
-        //     else if(curr<third){
-        //         third=curr;
-        //     }
-
-
+        //     else if(nums[i]<c)
+        //         c=nums[i];
         // }
-        // first+=second+third;
-        // return first;
 
-        int a=nums[0],b=INT_MAX,c=INT_MAX;
-        int n=nums.size();
-        for(int i=1;i<n;i++){
-            // if(nums[i]<a){
-            //     c=b;
-            //     b=a;
-            //     a=nums[i];
-            // }
-            if(nums[i]<b){
-                c=b;
-                b=nums[i];
-            }
-            else if(nums[i]<c)
-                c=nums[i];
-        }
+        // return a+b+c;       
 
-        return a+b+c;        
+        int a=nums[0];
+        reverse(nums.begin(),nums.end());
+        nums.pop_back();
+        sort(nums.begin(),nums.end());
+        return a+nums[0]+nums[1];
+
     }
 };
