@@ -73,8 +73,8 @@ public:
     vector<vector<string>> solveNQueens(int n) {
         vector<string> board(n,string(n,'.'));
         vector<vector<string>> ans;
-        solve(0,n,ans,board);
-        // nqueen(0,n,board,ans);
+        // solve(0,n,ans,board);
+        nqueen(0,n,board,ans);
         return ans;
     }
 };
