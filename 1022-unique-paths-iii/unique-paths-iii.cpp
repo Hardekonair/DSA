@@ -5,18 +5,18 @@ public:
             return 1;
         }
         vis[i][j]=1;
-        count--;
         vector<int>r={1,0,0,-1};
         vector<int>c={0,-1,1,0};
         int ans=0;
         for(int k=0;k<4;k++){
             int ni=i+r[k], nj=j+c[k];
             if(ni>=0 && ni<grid.size() && nj>=0 && nj<grid[0].size() && grid[ni][nj]!=-1 && !vis[ni][nj]){
-                ans=ans+up3(ni,nj,count,grid,vis);
+                if(grid[ni][nj]==2 && count!=2)
+                    continue;
+                ans=ans+up3(ni,nj,count-1,grid,vis);
             }
         }
         vis[i][j]=0;
-        count++;
         return ans;
     }
     int uniquePathsIII(vector<vector<int>>& grid) {
