@@ -46,6 +46,21 @@ public:
         // return max(pick,notpick);
         return dp[i]=max(pick,notpick);
     }
+    int helper2(int i,int j,vector<int>& nums){      // BASIC TABULATION
+        if(j-i+1==1)  // MUST REMEMBER THIS EDGE CASE
+            return nums[i];
+
+        dp[i]=nums[i];
+        dp[i+1]=max(nums[i],nums[i+1]);
+
+        for(int k=i+2;k<=j;k++){
+            int pick=nums[k]+dp[k-2];
+            int notpick=0+dp[k-1];
+            dp[k]=max(pick,notpick);
+        }
+
+        return dp[j];
+    }
     int rob(vector<int>& nums) {
         // vector<int> t1,t2;
         int n=nums.size();
@@ -62,11 +77,14 @@ public:
         // }
 
         // return max(helper(t1),helper(t2));
-        dp.resize(n,-1);
-        int a=helper1(n-1,1,nums);
-        dp.assign(n,-1);
+        // dp.resize(n,-1);
+        dp.resize(n,0);
+        // int a=helper1(n-1,1,nums);
+        int a=helper2(1,n-1,nums);
+        // dp.assign(n,-1);
+        dp.assign(n,0);
 
-        int b=helper1(n-2,0,nums);
+        int b=helper2(0,n-2,nums);
         return max(a,b);
         // dp.resize(n,vector<int>(n,-1));
         // return houserobber2(n-1,nums,false);
