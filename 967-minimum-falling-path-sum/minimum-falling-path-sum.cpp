@@ -14,9 +14,9 @@ public:
         int right=helper1(mat,m-1,n+1);
 
         int dir=min({left,up,right});
-        if(dir==INT_MAX)
-            return mat[m][n];
-        else 
+        // if(dir==INT_MAX)
+        //     return mat[m][n];
+        // else 
             return mat[m][n]+dir;
 
     }
@@ -31,9 +31,9 @@ public:
             return dp[m][n];
 
 
-        int left=helper1(mat,m-1,n-1);
-        int up=helper1(mat,m-1,n);
-        int right=helper1(mat,m-1,n+1);
+        int left=helper2(mat,m-1,n-1);
+        int up=helper2(mat,m-1,n);
+        int right=helper2(mat,m-1,n+1);
 
         int dir=min({left,up,right});
         if(dir==INT_MAX)
@@ -44,6 +44,25 @@ public:
     }
 
                                 // TABULATION
+    int minfallguy(vector<vector<int>>& grid,int n){
+        vector<vector<int>>dp(grid.begin(),grid.end());
+        for(int i=1;i<n;i++){
+            for(int j=0;j<n;j++){
+                int temp=dp[i-1][j];
+                if(j-1>=0)
+                    temp=min(temp,dp[i-1][j-1]);
+                if(j+1<n)
+                    temp=min(temp,dp[i-1][j+1]);
+                dp[i][j]+=temp;
+            }
+
+        }
+        int ans=1e9;
+        for(int i=0;i<n;i++){
+            ans=min(ans,dp[n-1][i]);
+        }
+        return ans;
+    }
     int helper3(vector<vector<int>>& mat,int m,int n){
         for(int i=0;i<n;i++){
             dp[0][i]=mat[0][i];
@@ -101,11 +120,12 @@ public:
         dp.resize(m,vector<int>(m,-1));
         // int ans=INT_MAX;
         // for(int i=0;i<m;i++)
-        // ans=min(ans,helper1(matrix,matrix.size()-1,i)) ;
+        // ans=min(ans,helper2(mat,mat.size()-1,i)) ;
 
         // return ans;
 
 
-        return helper4(mat,m,m);
+        // return helper4(mat,m,m);
+        return minfallguy(mat,m);
     }
 };
