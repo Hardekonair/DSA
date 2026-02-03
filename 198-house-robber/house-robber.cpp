@@ -1,18 +1,5 @@
 class Solution {
 public:
-
-    int houserobber(int i,vector<int>& nums){
-        dp[0]=nums[0];
-        if(nums.size()==1)
-            return dp[0];
-        dp[1]=max(nums[0],nums[1]);
-
-        for(int i=2;i<nums.size();i++){
-            dp[i]=max(nums[i]+dp[i-2],dp[i-1]);
-        }
-        
-        return dp[nums.size()-1];
-    }
     int dp[100];
                             // MEMOIZATION
     int helper1(int i,vector<int>& nums){
@@ -32,7 +19,7 @@ public:
 
                                 // TABULATION - RECURSION
     int helper2(vector<int>& nums){      // BASIC TABULATION
-        if(nums.size()==1)
+        if(nums.size()==1)  // MUST REMEMBER THIS EDGE CASE
             return nums[0];
 
         dp[0]=nums[0];
@@ -67,8 +54,7 @@ public:
     int helper4(vector<int>& nums){
         int prev=nums[0];
         int prev2=0;
-        int ans=INT_MAX;
-        dp[0]=nums[0];
+
         for(int i=1;i<nums.size();i++){
             int pick=nums[i]+prev2;
             int notpick=0+prev;
@@ -85,8 +71,7 @@ public:
         memset(dp,-1,sizeof(dp));
         // return helper(nums.size()-1,nums);
 
-        // return helper4(nums);
-        return houserobber(nums.size()-1,nums);
+        return helper4(nums);
         
     }
 };
