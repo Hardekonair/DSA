@@ -3,7 +3,9 @@ public:
 
     int houserobber(int i,vector<int>& nums){
         if(i==0)    return nums[0];
-        if(i<0)     return 0;
+        // dp[0]=nums[0];
+        // dp
+        if(i==1)     return max(nums[0],nums[1]);
         if(dp[i]!=-1)
             return dp[i];
         return dp[i]=max(nums[i]+houserobber(i-2,nums),houserobber(i-1,nums));
