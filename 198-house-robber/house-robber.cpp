@@ -2,13 +2,16 @@ class Solution {
 public:
 
     int houserobber(int i,vector<int>& nums){
-        if(i==0)    return nums[0];
-        // dp[0]=nums[0];
-        // dp
-        if(i==1)     return max(nums[0],nums[1]);
-        if(dp[i]!=-1)
-            return dp[i];
-        return dp[i]=max(nums[i]+houserobber(i-2,nums),houserobber(i-1,nums));
+        dp[0]=nums[0];
+        if(nums.size()==1)
+            return dp[0];
+        dp[1]=max(nums[0],nums[1]);
+
+        for(int i=2;i<nums.size();i++){
+            dp[i]=max(nums[i]+dp[i-2],dp[i-1]);
+        }
+        
+        return dp[nums.size()-1];
     }
     int dp[100];
                             // MEMOIZATION
