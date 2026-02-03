@@ -1,5 +1,18 @@
 class Solution {
 public:
+    vector<int>dp;
+    int climbstair(int n){
+        if(n<0)
+            return 0;
+        if(n==0)
+            return 1;
+        dp[0]=1;
+        dp[1]=1;
+        for(int i=2;i<=n;i++){
+            dp[i]=dp[i-1]+dp[i-2];
+        }
+        return dp[n];
+    }
 
 //     void helper(int i, int n, int& ans, vector<int>& dp) {
 //     if (i == n) {
@@ -20,7 +33,6 @@ public:
 //     dp[i] = ans - before; // ways found from this index
 // }
 
-
     int helper(int n,vector<int>& dp){
         if(n==0)
             return 1;
@@ -32,6 +44,7 @@ public:
     }
 
 
+    // int t[48];  // globally declaring dp
     int climbStairs(int n) {
         // if(n==0 || n==1)
         //     return 1;
@@ -52,10 +65,17 @@ public:
         // return b;
 
                                 // BFS TRAVERSAL APPROACH
-        
-        int ans=0;
-        vector<int>dp(n+2,-1);
-        return helper(n,dp);
-        // return ans;
+                                // using private dp
+        // vector<int>dp(n+2,-1);
+        // return helper(n,dp);
+        dp.resize(n+1,-1);
+        return climbstair(n);
+    
+                        // using global dp
+        // memset(t,-1,sizeof(t));       // memory allocation of global dp array
+        // vector.resize(47,-1);      for memory alloc in vector
+       
+    
+    
     }
 };
