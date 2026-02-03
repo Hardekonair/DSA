@@ -1,5 +1,21 @@
 class Solution {
 public: 
+    vector<vector<int>>dp;
+    int houserobber2(int i,vector<int>& nums,bool last){
+        if(i<0) return 0;
+        if(i==0 && last)    return 0;
+        if(i==0 && last==false)    return nums[0];
+        if(dp[i][last]!=-1)
+            return dp[i][last];
+        int notpick=houserobber2(i-1,nums,last);
+        int pick=0;
+        if(i==nums.size()-1)
+            last=true;
+        pick=nums[i]+houserobber2(i-2,nums,last);
+        
+        return dp[i][last]=max(pick,notpick);
+        
+    }
     int helper(vector<int> nums){    // SAME AS HOUSE ROBBER 1
         int prev1=nums[0], prev2=0;
 
@@ -26,7 +42,9 @@ public:
                 t2.push_back(nums[i]);
         }
 
-        return max(helper(t1),helper(t2));
+        // return max(helper(t1),helper(t2));
+        dp.resize(n,vector<int>(2,-1));
+        return houserobber2(n-1,nums,false);
         
     }
 };
