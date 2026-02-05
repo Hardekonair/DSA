@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // int assigncook(int )
     // int helper(vector<int>& g, vector<int>& s,int i,int j){
     //     if(j<0 || i<0){
     //         // if(c==g.size())
@@ -15,18 +16,35 @@ public:
 
     //     return max(pick);        
     // }
+    // int findContentChildren(vector<int>& g, vector<int>& s) {
+    //     sort(g.begin(),g.end());
+    //     sort(s.begin(),s.end());
+    //     int c=0;
+    //     int i=g.size()-1,j=s.size()-1;
+    //     while(i>=0 && j>=0){
+    //         if(g[i]<=s[j]){
+    //             c++;
+    //             j--;
+    //         }
+    //             i--;
+    //     }
+    //     return c;
+    // }
     int findContentChildren(vector<int>& g, vector<int>& s) {
         sort(g.begin(),g.end());
         sort(s.begin(),s.end());
-        int c=0;
-        int i=g.size()-1,j=s.size()-1;
-        while(i>=0 && j>=0){
+        int i=0,j=0;
+        int n=g.size(),m=s.size();
+        int count=0;
+        while(i<n && j<m){
             if(g[i]<=s[j]){
-                c++;
-                j--;
+                count++;
+                i++,j++;
             }
-                i--;
+            else if(g[i]>s[j]){
+                j++;
+            }
         }
-        return c;
+        return count;
     }
 };
