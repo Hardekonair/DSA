@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<vector<int>>dp;
-    bool valid(int i,int close,string s){
+    bool valid(int i,int close,string& s){
         if(close<0)
             return false;
         if(i==0){
