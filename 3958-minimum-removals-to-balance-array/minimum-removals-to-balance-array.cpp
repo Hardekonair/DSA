@@ -7,7 +7,7 @@ public:
         int i=0,j=0;
         int ans=0;
         while(j<n){
-            if((long long)nums[j]<=(long long)k*nums[i]){
+            if(nums[j]<=(long long)k*nums[i]){
                 ans=max(ans,j-i+1);
                 j++;
             }
