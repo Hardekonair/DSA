@@ -1,7 +1,7 @@
 class Solution {
 public:
 
-    bool bestapproach(string s){
+    bool bestapproach(string& s){
         int extraopen=0;
         int extraclose=0;
         for(auto it:s){
