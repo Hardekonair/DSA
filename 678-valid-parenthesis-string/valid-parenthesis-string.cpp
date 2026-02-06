@@ -1,5 +1,33 @@
 class Solution {
 public:
+
+    bool bestapproach(string s){
+        int extraopen=0;
+        int extraclose=0;
+        for(auto it:s){
+            if(it=='(' || it=='*')
+                extraopen++;
+            else
+                extraopen--;
+            
+            if(extraopen<0)
+                return false;
+        }
+        for(int i=s.size()-1;i>=0;i--){
+            int it=s[i];
+            if(it==')' || it=='*')
+                extraclose++;
+            else
+                extraclose--;
+            
+            if(extraclose<0)
+                return false;
+        }
+        return true;
+    }
+
+
+
     vector<vector<int>>dp;
     bool valid(int i,int close,string& s){
         if(close<0)
@@ -81,6 +109,7 @@ public:
         int o=0;
         dp.resize(s.size(),vector<int>(s.size(),-1));
         // return valid(s.size()-1,o,s);
-        return valid2(s);
+        // return valid2(s);
+        return bestapproach(s);
     }
 };
