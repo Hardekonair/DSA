@@ -52,10 +52,35 @@ public:
         }
         return dp[n-1][0];        
     }
+    bool valid2(string s){
+        stack<int> parst,astst;
+
+        for(int i=0;i<s.size();i++){
+            if(s[i]=='(')   parst.push(i);
+            else if(s[i]==')') {
+                if(parst.empty()){
+                    if(!astst.empty() && astst.top()<i){
+                        astst.pop();
+                    }
+                    else 
+                        return false;
+                }
+                else
+                    parst.pop();
+            }           
+            else if(s[i]=='*')   astst.push(i);
+        }
+        while(!parst.empty() && !astst.empty()){
+            if(parst.top()<astst.top()){
+                parst.pop();astst.pop();}
+            else return false;
+        }
+        return parst.empty();
+    }
     bool checkValidString(string s) {
         int o=0;
         dp.resize(s.size(),vector<int>(s.size(),-1));
         // return valid(s.size()-1,o,s);
-        return valid1(s);
+        return valid2(s);
     }
 };
