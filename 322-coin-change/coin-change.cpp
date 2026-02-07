@@ -1,6 +1,21 @@
 class Solution {
 public:
     vector<vector<int>> dp;
+    int coinchange(int i,int amount,vector<int>& arr){ 
+        if(amount<0){
+            return 1e9;
+        }
+        if(amount==0)
+            return 0;
+        if(dp[i][amount]!=-1)
+            return dp[i][amount];
+        if(i==0){
+            if(amount%arr[i]==0)
+                return amount/arr[i];
+            return 1e9;
+        }
+        return dp[i][amount]=min(1+coinchange(i,amount-arr[i],arr),coinchange(i-1,amount,arr));
+    }
     int helper(vector<int>& coins,int amount, int i){
         if(amount==0)
             return 0;
@@ -53,6 +68,10 @@ public:
     int coinChange(vector<int>& coins, int amount) {
         dp.resize(coins.size(),vector<int>(amount+1,-1));
         // return helper(coins,amount,coins.size()-1)==1e9?-1:helper(coins,amount,coins.size()-1);
-        return helper1(coins,amount);
+        // return helper1(coins,amount);
+        int ans=coinchange(coins.size()-1,amount,coins);
+        if(ans>=1e9)
+            return -1;
+        return ans;
     }
 };
