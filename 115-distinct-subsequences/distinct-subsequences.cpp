@@ -2,8 +2,15 @@ class Solution {
 public:
     vector<vector<int>> dp;
     int countdistinct(string s,string t,int i,int j){
-        if(j<0)
-            return 1;
+        if(j==0){
+            int x=0;
+            while(i>=0 ){
+                if(s[i]==t[j])
+                    x++;
+                i--;
+            }
+            return x;
+        }
         if(i<0)
             return 0;
         if(dp[i][j]!=-1)
@@ -55,7 +62,7 @@ public:
     }
     int numDistinct(string s, string t) {
         dp.resize(s.size(),vector<int>(t.size(),-1));
-        // return countdistinct(s,t,s.size()-1,t.size()-1);
-        return countdistinct1(s,t);
+        return countdistinct(s,t,s.size()-1,t.size()-1);
+        // return countdistinct2(s,t);
     }
 };
