@@ -38,10 +38,7 @@ public:
         }
         sort(vec.begin(),vec.end());
         long long half=0;
-        if(totalweight%2==0)
-            half=totalweight/2;
-        else
-            half=(totalweight+1)/2;
+        half=(totalweight+1)/2;
         
         long long prefix=0;
         long long t=0;
