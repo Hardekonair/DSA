@@ -21,13 +21,31 @@ public:
                 countk(i+1,c2-factors[i][0],c3-factors[i][1],c5-factors[i][2],factors,target);
     }
 
+    int dp1[19][80][40][40];
+    long long fn(int i,int c2,int c3,int c5,vector<vector<int>>& factors,vector<int>& target){
+        if(i==factors.size()){
+            if(c2-20==target[0] && c3-20==target[1] && c5-20==target[2])
+                return true;
+            return false;
+        }
+        if(dp1[i][c2][c3][c5]!=-1)
+            return dp1[i][c2][c3][c5];
+        
+        return dp1[i][c2][c3][c5]=
+                fn(i+1,c2+factors[i][0],c3+factors[i][1],c5+factors[i][2],factors,target)+
+                fn(i+1,c2,c3,c5,factors,target)+
+                fn(i+1,c2-factors[i][0],c3-factors[i][1],c5-factors[i][2],factors,target);
+    }
+
     
     int countSequences(vector<int>& nums, long long k) {
         int n=nums.size();
 
-        // dp.resize(101,
-        //             vector<vector<long long>>(63,
-        //               vector<long long>(43,-1)));
+        // dp1.resize(19,
+        //             vector<vector<vector<long long>>>(80,
+        //                 vector<vector<long long>>(40,
+        //                     vector<int>(40,-1))));
+        memset(dp1,-1,sizeof(dp1));
         
         vector<vector<int>>factors(n,vector<int>(3));
         for(int i=0;i<n;i++){
@@ -65,7 +83,8 @@ public:
             if(x!=1)    return 0;    // k contains factors other than 2,3,5 which can't be acheived
             target={c2,c3,c5};
         
-        return countk(0,0,0,0,factors,target);
+        // return countk(0,0,0,0,factors,target);
+        return fn(0,20,20,20,factors,target);
     }
 };
 // int dp[19][80][40][40] {};
