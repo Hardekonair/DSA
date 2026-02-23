@@ -3,8 +3,8 @@ public:
     // vector<vector<vector<long long>>>dp;
     map<string,int>dp;
     long long countk(int i,int c2,int c3,int c5,vector<vector<int>>& factors,vector<int>& target){
-        if(c2<-20 || c2>20 || c3<-20 || c3>20 || c5<-20 || c5>20)
-           return 0;
+        // if(c2<-20 || c2>20 || c3<-20 || c3>20 || c5<-20 || c5>20)
+        //    return 0;
         if(i==factors.size()){
             if(c2==target[0] && c3==target[1] && c5==target[2]){
                 return 1;
