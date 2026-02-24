@@ -20,19 +20,23 @@ public:
         vector<vector<int>> dir={{0,1},{1,0},{0,-1},{-1,0}};
         while(!q.empty()){
             int k=q.size();
-            time++;
+            bool rotted=false;
+            
             for(int l=0;l<k;l++){
                 auto [i,j]=q.front();
                 q.pop();
                 for(auto it:dir){
                     int ni=i+it[0], nj=j+it[1];
                     if(isvalid(ni,nj,n,m) && grid[ni][nj]==1){
+                        rotted=true;
                         q.push({ni,nj});
                         grid[ni][nj]=2;
                         // vis[i][j]=1;
                     }
                 }
             }
+            if(rotted)
+                time++;
         }
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
@@ -40,6 +44,6 @@ public:
                     return -1;
             }
         }
-        return time!=0?time-1:time;
+        return time;
     }
 };
