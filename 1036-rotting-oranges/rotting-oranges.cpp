@@ -1,48 +1,38 @@
 class Solution {
 public:
+    bool isvalid(int i,int j,int m,int n){
+        if(i<0 || j<0 || i>=m || j>=n)
+            return false;
+        return true;
+    }
     int orangesRotting(vector<vector<int>>& grid) {
-        int n=grid.size();
-        int m=grid[0].size();
-
         queue<pair<int,int>>q;
+        int n=grid.size(),m=grid[0].size();
+        // vector<vector<int>>vis(n,vector<int>(m,0));
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                 if(grid[i][j]==2)
                     q.push({i,j});
+                    // vis[i][j]=1;
             }
         }
         int time=0;
+        vector<vector<int>> dir={{0,1},{1,0},{0,-1},{-1,0}};
         while(!q.empty()){
-            int size=q.size();
-            bool rot=false;
-            for(int i=0;i<size;i++){
-                int r=q.front().first;
-                int c=q.front().second;
+            int k=q.size();
+            time++;
+            for(int l=0;l<k;l++){
+                auto [i,j]=q.front();
                 q.pop();
-
-                if(r-1>=0 && grid[r-1][c]==1){
-                    rot=true;
-                    grid[r-1][c]=2;
-                    q.push({r-1,c});
-                }
-                if(r+1<n && grid[r+1][c]==1){
-                    rot=true;
-                    grid[r+1][c]=2;
-                    q.push({r+1,c});
-                }
-                if(c-1>=0 && grid[r][c-1]==1){
-                    rot=true;
-                    grid[r][c-1]=2;
-                    q.push({r,c-1});
-                }
-                if(c+1<m && grid[r][c+1]==1){
-                    rot=true;
-                    grid[r][c+1]=2;
-                    q.push({r,c+1});
+                for(auto it:dir){
+                    int ni=i+it[0], nj=j+it[1];
+                    if(isvalid(ni,nj,n,m) && grid[ni][nj]==1){
+                        q.push({ni,nj});
+                        grid[ni][nj]=2;
+                        // vis[i][j]=1;
+                    }
                 }
             }
-            if(rot)
-                time++;
         }
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
@@ -50,7 +40,6 @@ public:
                     return -1;
             }
         }
-
-        return time;
+        return time!=0?time-1:time;
     }
 };
