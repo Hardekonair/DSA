@@ -1,35 +1,44 @@
 class Solution {
 public:
-    bool canFinish(int numCourses, vector<vector<int>>& pre) {
-        int v=numCourses;
-        vector<vector<int>> adj(v);
-        for(auto it:pre){
-            adj[it[0]].push_back(it[1]);
-        }
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+                                    //  USING TOPOSORT
 
-        vector<int> ind(v,0);
-        for(auto it:pre){
-            ind[it[1]]++;
+        // CREATING A DIRECTED GRAPH OF COURSES
+        int n=numCourses;
+        vector<vector<int>>adj(n);
+
+        vector<int>indegree(n,0);
+        for(auto it:prerequisites){
+            adj[it[1]].push_back(it[0]);
+            indegree[it[0]]++;
         }
-        queue<int> q;
-        for(int i=0;i<v;i++){
-            if(ind[i]==0)
+        
+        // STORING INDEGREE OF 0, THAT WILL START THE COURSES
+        queue<int>q;
+        for(int i=0;i<n;i++){
+            if(indegree[i]==0){
                 q.push(i);
+            }
         }
-        vector<int> ans;
-        while(!q.empty()){
-            int x=q.front();
-            q.pop();
-            ans.push_back(x);
 
-            for(auto it:adj[x]){
-                ind[it]--;
-                if(ind[it]==0)
+        // TRAVERSING ZERO INDEGREE AND REDUCING CONNECTED COMP DEGREE
+        while(!q.empty()){
+            int node=q.front();
+            q.pop();
+
+            for(auto it:adj[node]){
+                indegree[it]--;
+                if(indegree[it]==0)
                     q.push(it);
             }
         }
-        if(ans.size()==v)
-            return true;
-        return false;
+
+        // CHECKING IF ALL COURSES ARE NOT VISITED = IF ALL INDEGREE 0 OR NOT
+        for (auto deg: indegree){
+            if(deg!=0){
+                return false;
+            }
+        }
+        return true;
     }
 };
