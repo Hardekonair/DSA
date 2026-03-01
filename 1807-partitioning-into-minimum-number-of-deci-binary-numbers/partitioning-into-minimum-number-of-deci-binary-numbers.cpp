@@ -1,13 +1,5 @@
 class Solution {
 public:
-    // void bin(int n,string temp,vector<string>& ans){
-    //     if(temp.size()==n){
-    //         ans.push_back(temp);
-    //         return;
-    //     }
-    //     bin(n,temp+'1',ans);
-    //     bin(n,temp+'0',ans);
-    // }
 
     int fn(string n){
         if(n==""){
@@ -31,6 +23,11 @@ public:
     }
 
     int minPartitions(string n) {
-        return fn(n);
+        // return fn(n);
+        int dig=0;
+        for(auto it:n){
+            dig=max(dig,it-'0');
+        }
+        return dig;
     }
 };
