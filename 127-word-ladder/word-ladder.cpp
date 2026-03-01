@@ -26,23 +26,24 @@ public:
             for(int i=0;i<n;i++){
                 string word=q.front();
                 q.pop();
-                // if(isvalid(word,endWord) && mpp.find(endWord)!=mpp.end()){
-                //     found=true;
-                //     break;
-                // }
-                for(auto it:mpp){
-                    if(isvalid(word,it.first) && it.second==0){
-                        if(it.first==endWord){
-                            return len+1;
+                if(word==endWord){
+                    return len;
+                }
+                for(int i=0;i<word.size();i++){
+                    char prev=word[i];
+                    for(char ch='a';ch<='z';ch++){
+                        word[i]=ch;
+                        if(mpp.find(word)!=mpp.end() && mpp[word]==0){
+                            q.push(word);
+                            mpp[word]=1;
                         }
-                        q.push(it.first);
-                        mpp[it.first]=1;
+                        
                     }
+                    word[i]=prev;
                 }
             }
             len++;
         }
-        if(!found)  return 0;
-        return len-1;
+        return 0;
     }
 };
