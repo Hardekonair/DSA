@@ -35,7 +35,7 @@ public:
             string word=q.front();
             int level=mpp[word];
             q.pop();
-            if(word==endWord)   break;
+            // if(word==endWord)   break;
             for(int i=0;i<sz;i++){
                 char prev=word[i];
                 for(char c='a';c<='z';c++){
