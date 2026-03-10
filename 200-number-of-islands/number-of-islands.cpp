@@ -1,8 +1,8 @@
 class Solution {
 public:
     void dfs(int row,int col,vector<vector<char>>& grid,vector<vector<int>>& vis){
-        if(vis[row][col])
-            return ;
+        // if(vis[row][col])
+        //     return ;
         vis[row][col]=1;
         vector<int> tr={-1,1,0,0};
         vector<int> tc={0,0,-1,1};
