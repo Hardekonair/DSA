@@ -24,7 +24,7 @@ public:
             ans.push_back(x);
             for(auto &it:revadj[x]){
                 ind[it]--;
-                if(ind[it]<=0)
+                if(ind[it]==0)
                     q.push(it);
             }
         }
