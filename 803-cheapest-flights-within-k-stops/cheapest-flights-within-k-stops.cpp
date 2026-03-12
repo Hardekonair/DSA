@@ -7,17 +7,17 @@ public:
         }
         
         vector<int>p(n,1e9);
-        // p[0]=0;
+        p[src]=0;
         queue<tuple<int,int,int>>q;
         q.push({0,src,-1});          
         while(!q.empty()){
             auto[price,node,stop]=q.front();
             q.pop();
 
-            if(stop==k) continue;
+            if(stop>k) continue;
 
             for(auto it:adj[node]){
-                if(p[it[0]]>price+it[1]){
+                if(p[it[0]]>price+it[1] && stop+1<=k){
                     q.push({price+it[1],it[0],stop+1});
                     p[it[0]]=price+it[1];
                 }
