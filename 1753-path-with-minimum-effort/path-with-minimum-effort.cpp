@@ -31,7 +31,7 @@ public:
                     int eff=abs(heights[i][j]-heights[ni][nj]);
                     int neff=max(eff,e);
                     if(neff<dis[ni][nj]){
-                        pq.push({max(e,eff),{ni,nj}});
+                        pq.push({neff,{ni,nj}});
                         dis[ni][nj]=neff;
                     }
                 }
