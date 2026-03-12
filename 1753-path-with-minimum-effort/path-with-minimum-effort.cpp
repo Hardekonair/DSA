@@ -21,7 +21,7 @@ public:
             if(i==n-1 && j==m-1)
                 return e;
 
-            for(auto it:dir){
+            for(auto &it:dir){
                 int ni=i+it[0], nj=j+it[1];
                 if(ni>=0 && ni<n && nj>=0 && nj<m){
                     int eff=abs(heights[i][j]-heights[ni][nj]);
