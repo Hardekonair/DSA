@@ -9,6 +9,7 @@ public:
                         >pq;
 
         vector<vector<int>>dis(n,vector<int>(m,1e9));
+        dis[0][0]=0;
 
         pq.push({0,{0,0}});
         int dir[4][2]={{0,1},{1,0},{0,-1},{-1,0}};
