@@ -18,9 +18,13 @@ public:
             auto [i,j]=pos;
             pq.pop();
 
+            
+
             if(i==n-1 && j==m-1)
                 return e;
 
+            if(e>dis[i][j]) 
+                continue;
             for(auto &it:dir){
                 int ni=i+it[0], nj=j+it[1];
                 if(ni>=0 && ni<n && nj>=0 && nj<m){
