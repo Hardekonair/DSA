@@ -11,7 +11,7 @@ public:
         vector<vector<int>>dis(n,vector<int>(m,1e9));
 
         pq.push({0,{0,0}});
-        vector<vector<int>>dir={{0,1},{1,0},{0,-1},{-1,0}};
+        int dir[4][2]={{0,1},{1,0},{0,-1},{-1,0}};
         while(!pq.empty()){
             auto [e,pos]=pq.top();
             auto [i,j]=pos;
