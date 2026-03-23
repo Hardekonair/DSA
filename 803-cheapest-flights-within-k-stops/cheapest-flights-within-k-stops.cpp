@@ -16,7 +16,7 @@ public:
 
             if(stop>k) continue;
 
-            for(auto it:adj[node]){
+            for(auto &it:adj[node]){
                 if(p[it[0]]>price+it[1] && stop+1<=k){
                     q.push({price+it[1],it[0],stop+1});
                     p[it[0]]=price+it[1];
