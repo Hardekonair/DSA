@@ -31,66 +31,52 @@ public:
                     rank[pv]+=1;
             }
     };
-    void dfs(int i,vector<vector<int>>& adj, vector<int>& vis){
-        vis[i]=1;
-        for(auto it:adj[i]){
-            if(vis[it]==0){
-                dfs(it,adj,vis);
-            }
-        }
-    }
     int makeConnected(int n, vector<vector<int>>& conn) {
-        vector<vector<int>>adj(n);
+
+        DSU dsu(n);
+
+        int extraedge=0;
         for(auto it:conn){
-            adj[it[0]].push_back(it[1]);
-            adj[it[1]].push_back(it[0]);
+            int paru=dsu.find(it[0]),parv=dsu.find(it[1]);
+            if(paru==parv)  extraedge++;
+            else    dsu.uni(paru,parv);
         }
 
-        int c=0;
-        vector<int>vis(n,0);
+        int component=0;
         for(int i=0;i<n;i++){
-            if(vis[i]==0){
-                dfs(i,adj,vis);
-                c++;
-            }
+            if(dsu.find(i)==i)
+                component++;
         }
 
-        if(conn.size()<n-1) return -1;
-        return c-1;
+        if(conn.size()<n-1)
+            return -1;
+        return component-1;
     }
-    // int find(vector<int>& par,int x){
-    //     if(par[x]==x)
-    //         return x;
-    //     return par[x]=find(par,par[x]);
-    // }
-    // bool uni(vector<int>& par,int u, int v){
-    //     int pu=find(par,u), pv=find(par,v);
-    //     if(pu==pv)
-    //         return false;
-    //     par[pu]=pv;
-    //     return true;
+    // void dfs(int i,vector<vector<int>>& adj, vector<int>& vis){
+    //     vis[i]=1;
+    //     for(auto it:adj[i]){
+    //         if(vis[it]==0){
+    //             dfs(it,adj,vis);
+    //         }
+    //     }
     // }
     // int makeConnected(int n, vector<vector<int>>& conn) {
-
-    //     vector<int> par(n);
-    //     for(int i=0;i<n;i++){
-    //         par[i]=i;
-    //     }
-
-    //     int extraedge=0;
+    //     vector<vector<int>>adj(n);
     //     for(auto it:conn){
-    //         if(uni(par,it[0],it[1])==false)
-    //         extraedge++;
+    //         adj[it[0]].push_back(it[1]);
+    //         adj[it[1]].push_back(it[0]);
     //     }
 
-    //     int component=0;
+    //     int c=0;
+    //     vector<int>vis(n,0);
     //     for(int i=0;i<n;i++){
-    //         if(find(par,i)==i)
-    //             component++;
+    //         if(vis[i]==0){
+    //             dfs(i,adj,vis);
+    //             c++;
+    //         }
     //     }
 
-    //     if(extraedge>=component-1)
-    //         return component-1;
-    //     return -1;
+    //     if(conn.size()<n-1) return -1;
+    //     return c-1;
     // }
 };
