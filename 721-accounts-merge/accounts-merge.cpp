@@ -56,22 +56,19 @@ public:
 
         for(int i=0;i<n;i++){
             int p=dsu.find(i);
-            if(p==i)continue;
-            for(auto it:mpp[i]){
-                mpp[p].insert(it);
+            if(p!=i){
+                mpp[p].insert(mpp[i].begin(),mpp[i].end());
             }
         }
         vector<vector<string>>ans;
         for(int i=0;i<n;i++){
-            vector<string>temp;
             if(dsu.find(i)==i){
+                vector<string>temp;
                 temp.push_back(acc[i][0]);
-                for(auto it:mpp[i])
-                    temp.push_back(it);
-                
+                for(auto &mail:mpp[i])
+                    temp.push_back(mail);
+                ans.push_back(temp);
             }
-            if(!temp.empty())
-            ans.push_back(temp);
         }
         return ans;
     }
