@@ -34,38 +34,59 @@ public:
 
         DSU dsu(n);
 
-        unordered_map<int,set<string>>mpp;
+        unordered_map<string,int>mtoi;
         for(int i=0;i<n;i++){
             for(int j=1;j<acc[i].size();j++){
-                mpp[i].insert(acc[i][j]);
-            }
-        }
-
-        for(int i=0;i<n;i++){
-            for(int j=i+1;j<n;j++){
-                // bool f=false;
-                for(auto it:mpp[j]){
-                    if(mpp[i].count(it)){
-                        dsu.uni(i,j);
-                        // f=true;
-                        continue;
-                    }
+                if(mtoi.count(acc[i][j])){
+                    dsu.uni(i,mtoi[acc[i][j]]);
+                }
+                else{
+                    mtoi[acc[i][j]]=i;
                 }
             }
         }
 
-        for(int i=0;i<n;i++){
+    
+        // unordered_map<int,set<string>>mpp;
+        // for(int i=0;i<n;i++){
+        //     for(int j=1;j<acc[i].size();j++){
+        //         mpp[i].insert(acc[i][j]);
+        //     }
+        // }
+
+        // for(int i=0;i<n;i++){
+        //     for(int j=i+1;j<n;j++){
+        //         // bool f=false;
+        //         for(auto it:mpp[j]){
+        //             if(mpp[i].count(it)){
+        //                 dsu.uni(i,j);
+        //                 // f=true;
+        //                 continue;
+        //             }
+        //         }
+        //     }
+        // }
+        // for(int i=0;i<n;i++){
+        //     int p=dsu.find(i);
+        //     if(p!=i){
+        //         mpp[p].insert(mpp[i].begin(),mpp[i].end());
+        //     }
+        // }
+
+        unordered_map<int,set<string>>mp;
+        for(auto it:mtoi){
+            string m=it.first;
+            int i=it.second;
             int p=dsu.find(i);
-            if(p!=i){
-                mpp[p].insert(mpp[i].begin(),mpp[i].end());
-            }
+            mp[p].insert(m);
         }
+
         vector<vector<string>>ans;
         for(int i=0;i<n;i++){
             if(dsu.find(i)==i){
                 vector<string>temp;
                 temp.push_back(acc[i][0]);
-                for(auto &mail:mpp[i])
+                for(auto &mail:mp[i])
                     temp.push_back(mail);
                 ans.push_back(temp);
             }
