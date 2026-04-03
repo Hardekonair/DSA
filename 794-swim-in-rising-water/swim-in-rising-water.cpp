@@ -16,6 +16,9 @@ public:
             pq.pop();
             // vis[x][y]=1;
 
+            if(time>res[x][y])
+                continue;
+
             if(x==grid.size()-1 && y==grid.size()-1)
                 return time;
 
