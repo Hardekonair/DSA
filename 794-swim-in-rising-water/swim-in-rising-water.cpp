@@ -1,37 +1,42 @@
 class Solution {
 public:
-vector<vector<int>>d={{1,0},{0,1},{-1,0},{0,-1}};
-bool reachable(vector<vector<int>>& grid,int mid){
-    priority_queue<pair<int,pair<int,int>>,
-                    vector<pair<int,pair<int,int>>>,
-                    greater<pair<int,pair<int,int>>>>pq;
+                                    // BINARY ALGO
+    vector<vector<int>>d={{1,0},{0,1},{-1,0},{0,-1}};
+bool reachable(vector<vector<int>>& grid, int mid) {
+    int n = grid.size();
 
-    int n=grid.size();
-    vector<vector<int>>vis(n,vector<int>(n,0));
+    // If starting cell itself is not allowed
+    if (grid[0][0] > mid) return false;
 
-    pq.push({grid[0][0],{0,0}});
-    while(!pq.empty()){
-        auto [t,c]=pq.top();
-        auto [x,y]=c;
-        pq.pop();
-        vis[x][y]==1;
+    vector<vector<int>> vis(n, vector<int>(n, 0));
+    queue<pair<int,int>> q;
 
-        if(t>mid)return false;
+    q.push({0, 0});
+    vis[0][0] = 1;
 
-        if(x==n-1 && y==n-1)
+    vector<vector<int>> d = {{1,0},{0,1},{-1,0},{0,-1}};
+
+    while (!q.empty()) {
+        auto [x, y] = q.front();
+        q.pop();
+
+        // reached destination
+        if (x == n-1 && y == n-1)
             return true;
 
+        for (int i = 0; i < 4; i++) {
+            int nx = x + d[i][0];
+            int ny = y + d[i][1];
 
-        for(int i=0;i<4;i++){
-            int nx=x+d[i][0], ny=y+d[i][1];
-                if(nx<n && ny<n && nx>=0 && ny>=0 && vis[nx][ny]==0){
-                    vis[nx][ny]=1;
-                    int nt=max(t,grid[nx][ny]);
+            if (nx >= 0 && nx < n && ny >= 0 && ny < n &&
+                vis[nx][ny] == 0 && grid[nx][ny] <= mid) {
 
-                    pq.push({nt,{nx,ny}});
-                }
+                vis[nx][ny] = 1;
+                q.push({nx, ny});
+            }
         }
     }
+
     return false;
 }
     int swimInWater(vector<vector<int>>& grid) {
@@ -50,6 +55,8 @@ bool reachable(vector<vector<int>>& grid,int mid){
         }
         return ans;
     }
+
+                                // DJIKSTRA ALGO
     int swimInWater1(vector<vector<int>>& grid) {
         // SINCE STARTING AND ENDING POINT IS FIXED WE USE
         // SINGLE SOURCE SHORTEST PATH
