@@ -5,7 +5,7 @@ public:
                             vector<pair<int,pair<int,int>>>,
                             greater<pair<int,pair<int,int>>>>pq;
 
-        vector<vector<int>>vis(grid.size(),vector<int>(grid.size(),0));
+        vector<vector<int>>res(grid.size(),vector<int>(grid.size(),1e9));
 
         pq.push({grid[0][0],{0,0}});
     
@@ -21,15 +21,18 @@ public:
 
             for(auto it:dir){
                 int nx=x+it[0],ny=y+it[1];
-                if(nx>=0 && nx<grid.size() && ny>=0 && ny<grid.size() && vis[nx][ny]==0){
-                    vis[nx][ny]=1;
+                if(nx>=0 && nx<grid.size() && ny>=0 && ny<grid.size()){
                     int temp=max(time,grid[nx][ny]);
-                    pq.push({temp,{nx,ny}});
+                    if(temp<res[nx][ny]){
+                        res[nx][ny]=temp;
+                        pq.push({temp,{nx,ny}});
+
+                    }
                 }
             }
 
         }
-        return -1;
+        return res[grid.size()-1][grid.size()-1];
     }
     // int swimInWater(vector<vector<int>>& grid) {
     //     // SINCE STARTING AND ENDING POINT IS FIXED WE USE
