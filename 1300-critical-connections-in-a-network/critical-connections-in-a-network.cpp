@@ -1,35 +1,42 @@
 class Solution {
 public:
-    void dfs(int node,int parent,vector<int>& in,vector<int>& low,vector<vector<int>>& bridges, vector<int>& vis, vector<vector<int>>& adj,int& timer){
+    int timer=1;
+    vector<vector<int>>bridges;
+    void dfs(int node, int parent, vector<int>& low,vector<int>& tin,vector<int>& par,vector<int>& vis,vector<vector<int>>& adj){
         vis[node]=1;
-        low[node]=in[node]=timer;
+        low[node]=tin[node]=timer++;
+
         for(auto it:adj[node]){
-            if(it==parent)
-                continue;
-            if(vis[it])
-                low[node]=min(low[node],low[it]);
-            if(vis[it]==0){
-                timer++;
-                dfs(it,node,in,low,bridges,vis,adj,timer);
-                timer--;
-                low[node]=min(low[node],low[it]);
-                if(in[node]<low[it]){
+            if(it==parent) continue;
+            else if(vis[it]==0){
+                dfs(it,node,low,tin,par,vis,adj);
+                low[node]=min(low[it],low[node]);
+
+                if(tin[node]<low[it]){
                     bridges.push_back({node,it});
-                }
+                }               
+            }
+            else{
+                low[node]=min(low[node],low[it]);
             }
         }
+
     }
-    vector<vector<int>> criticalConnections(int n, vector<vector<int>>& con) {
+    vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {
         vector<vector<int>>adj(n);
-        for(auto it:con){
+        for(auto it:connections){
             adj[it[0]].push_back(it[1]);
             adj[it[1]].push_back(it[0]);
-        }
-        int timer=0;
-        vector<int> in(n),low(n),vis(n,0);
-        vector<vector<int>>bridges;
 
-        dfs(0,-1,in,low, bridges,vis,adj,timer);
+        }
+        vector<int>vis(n,0),par(n,-1),low(n,-1),tin(n,-1);
+
+
+        for(int i=0;i<n;i++){
+            if(par[i]==-1){
+                dfs(i,i,low,tin,par,vis,adj);
+            }
+        }
         return bridges;
     }
 };
