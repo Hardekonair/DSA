@@ -50,23 +50,20 @@ public:
                 }
             }
             else{
-                for(int i=0;i<it;i++){
-                    // if({x,y}!={0,0} && st.count({x,y})) break;
+                for(int i = 0; i < it; i++){
 
-                    if(xpos || ypos)
-                        (*active)++;
-                    else    
-                        (*active)--;
-                    if(st.count({x,y})){
-                        // rollback
-                        if(xpos || ypos)
-                            (*active)--;
-                        else
-                            (*active)++;
+                    int nx = x, ny = y;
 
-                        break;
-                    }
+                    if(xpos) nx++;
+                    else if(ypos) ny++;
+                    else if(xneg) nx--;
+                    else if(yneg) ny--;
 
+                    if(st.count({nx, ny})) break;
+
+                    // safe → move
+                    x = nx;
+                    y = ny;
                 }
             }
             ans=max(ans,x*x+y*y);
