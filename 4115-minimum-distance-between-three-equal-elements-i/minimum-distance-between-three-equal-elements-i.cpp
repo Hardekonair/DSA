@@ -9,7 +9,7 @@ public:
 
         vector<vector<int>>vec;
         int ans=1e9;
-        for(auto it:mpp){
+        for(auto &it:mpp){
             if(it.second.size()>2){
                 vector<int>arr=it.second;
                 for(int i=0;i+2<arr.size();i++){
