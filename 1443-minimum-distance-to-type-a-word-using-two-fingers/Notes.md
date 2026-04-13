@@ -1,1 +1,1 @@
-<h2>minimum-distance-to-type-a-word-using-two-fingers Notes</h2><hr>[ Time taken: 13hrs 31m 3s ]
+<h2>minimum-distance-to-type-a-word-using-two-fingers Notes</h2><hr>[ Time taken: 1hr 27m 8s ]
