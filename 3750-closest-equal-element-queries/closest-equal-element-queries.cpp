@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // imp case - [14,14,4,2,19,19,14,19,14], [2,4,8,6,3]
                                         // OPTIMAL - WORST CASE - O(LOG N)
     int find(int i,int j,int n){
         int diff=abs(i-j);
@@ -27,8 +28,9 @@ public:
                 int next=(it2==vec.end()?vec[0]:*it2);
                 int prev=(it1==vec.begin()?vec.back():*(it1-1));
                 
-                if(next!=-1)    dis=min(dis,find(ind,next,n));
-                if(prev!=-1)    dis=min(dis,find(ind,prev,n));
+                // if(next!=-1)    dis=min(dis,find(ind,next,n));
+                // if(prev!=-1)    dis=min(dis,find(ind,prev,n));
+                dis=min(find(ind,next,n),find(ind,prev,n));
                 
                 ans.push_back(dis);
 
