@@ -11,7 +11,7 @@ public:
             sum+=nums[i];
         }
         maxans=prevans;
-        for(int i=n-1;i>0;i--){
+        for(int i=n-1;i>=0;i--){
             int newans=prevans+sum-(n*nums[i]);
 
             maxans=max(maxans,newans);
