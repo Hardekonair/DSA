@@ -33,7 +33,8 @@ public:
             int bottom=c-1;
             for(int row=c-1;row>=0;row--){
                 if(grid[row][col]=='#'){
-                    swap(grid[row][col],grid[bottom][col]);
+                    if(row!=bottom)
+                        swap(grid[row][col],grid[bottom][col]);
                     bottom--;
                 }
                 else if(grid[row][col]=='*'){
