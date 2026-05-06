@@ -8,21 +8,36 @@ public:
                 grid[j][r-1-i]=box[i][j];
             }
         }
+                                    // USING QUEUE
+        // for(int col=0;col<r;col++){
+        //     queue<pair<int,int>>q;
+        //     for(int row=0;row<c;row++){
+        //         if(grid[row][col]=='#')
+        //             q.push({row,col});
+                
+        //         else if(grid[row][col]=='*')
+        //             q=queue<pair<int,int>>();   // to make entire queue empty
+                
+        //         else if(grid[row][col]=='.' && !q.empty()){
+        //             int ro=q.front().first, co=q.front().second;
+        //             q.pop();
+        //             grid[row][col]='#';
+        //             grid[ro][co]='.';
+        //             q.push({row,col});
+        //         }
+        //     }
+        // }
+
+                                        // DIRECT GRAVITY
         for(int col=0;col<r;col++){
-            queue<pair<int,int>>q;
-            for(int row=0;row<c;row++){
-                if(grid[row][col]=='#')
-                    q.push({row,col});
-                
-                else if(grid[row][col]=='*')
-                    q=queue<pair<int,int>>();   // to make entire queue empty
-                
-                else if(grid[row][col]=='.' && !q.empty()){
-                    int ro=q.front().first, co=q.front().second;
-                    q.pop();
-                    grid[row][col]='#';
-                    grid[ro][co]='.';
-                    q.push({row,col});
+            int bottom=c-1;
+            for(int row=c-1;row>=0;row--){
+                if(grid[row][col]=='#'){
+                    swap(grid[row][col],grid[bottom][col]);
+                    bottom--;
+                }
+                else if(grid[row][col]=='*'){
+                    bottom=row-1;
                 }
             }
         }
