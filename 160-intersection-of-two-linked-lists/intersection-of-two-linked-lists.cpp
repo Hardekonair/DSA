@@ -8,23 +8,15 @@
  */
 class Solution {
 public:
-    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        unordered_map<ListNode*, int>mpp;
-        while(headA){
-            // if(headA){
-                mpp[headA]++;
-            // }
-            headA=headA->next;
-        }
-        while(headB){
-            // if(headB){
-                if(mpp[headB]>0)
-                    return headB;
-                else
-                    mpp[headB]++;
-            // }
-            headB=headB->next;
-        }
-        return nullptr;
+ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+    ListNode* t1 = headA;
+    ListNode* t2 = headB;
+
+    while (t1 != t2) {
+        t1 = (t1 == NULL) ? headB : t1->next;
+        t2 = (t2 == NULL) ? headA : t2->next;
     }
+
+    return t1; // intersection node or NULL
+}
 };
