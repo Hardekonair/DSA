@@ -8,7 +8,7 @@ public:
             if(last!=it){
                 last=it;
             }
-            else if(last==it)
+            else 
                 temp++;
         }
         return temp+1;
