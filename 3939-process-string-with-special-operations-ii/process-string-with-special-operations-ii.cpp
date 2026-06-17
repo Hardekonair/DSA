@@ -23,7 +23,7 @@ public:
                 k=len-k-1;
             else if(s[i]=='#'){
                 len=len/2;
-                k=k>=len?k-len:k;
+                k=k>=len?k%len:k;
             }
             else
                 len--;
