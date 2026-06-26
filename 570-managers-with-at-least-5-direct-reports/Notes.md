@@ -1,0 +1,1 @@
+<h2>managers-with-at-least-5-direct-reports Notes</h2><hr>[ Time taken: 6d 6hrs 14m 31s ]
