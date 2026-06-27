@@ -1,5 +1,5 @@
 # Write your MySQL query statement below
-delete b
+delete a
 from person a
-join person b
-where a.email=b.email and a.id<b.id;
+left join person b
+on a.email=b.email where a.id>b.id;
