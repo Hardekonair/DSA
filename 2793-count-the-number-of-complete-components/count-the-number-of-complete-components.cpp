@@ -3,12 +3,12 @@ public:
     void dfs(int node, vector<vector<int>>& adj, vector<int>& vis, int& nodes, int& degreesum){
         vis[node]=1;
         for(auto it:adj[node]){
-            degreesum++;
+            // degreesum++;
             if(vis[it]==0){
                 dfs(it,adj,vis,nodes,degreesum);
             }
         }
-        // degreesum+=adj[node].size();
+        degreesum+=adj[node].size();
         nodes++;
     }
     int countCompleteComponents(int n, vector<vector<int>>& edges) {
