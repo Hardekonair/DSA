@@ -13,7 +13,7 @@ public:
     }
     int minimumEffort(vector<vector<int>>& tasks) {
         int left = 0, right = 1e9;
-        int ans = -1;
+        // int ans = -1;
 
         sort(tasks.begin(),tasks.end(),
             [](const vector<int>& a, const vector<int>& b)
@@ -22,17 +22,27 @@ public:
             }
         );
 
-        while(left <= right){
-            int mid=left+(right-left)/2;
-
-            if(ispossible(mid,tasks)){
-                ans = mid;
-                right = mid-1;
-            }
-            else{
-                left = mid+1;
-            }
+        // OPTIMAL
+        int consumed=0, ans=0;
+        for(auto it:tasks){
+            int req=max(it[0],it[1]);
+            ans=max(ans,consumed+req);  // required;
+            consumed += it[0];  
         }
         return ans;
+
+
+        // while(left <= right){
+        //     int mid=left+(right-left)/2;
+
+        //     if(ispossible(mid,tasks)){
+        //         ans = mid;
+        //         right = mid-1;
+        //     }
+        //     else{
+        //         left = mid+1;
+        //     }
+        // }
+        // return ans;
     }
 };
